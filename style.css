@@ -49,6 +49,10 @@ text-align: center;
 .estudante-nome{
 text-align: center;
 width: 35px;
+ font-size: 18px;
+    color: #333333;
+    margin-bottom: 8px;
+}
 }
 .estudante-imagem{
 width: 120px;
@@ -65,11 +69,48 @@ padding: 24px 0;
 .estudante.div{
 text-align: center;
 padding: 24px 0;
+background-color: #ffffff; /* Cor de fundo da caixinha */
+    border-radius: 8px;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
 }
 .estudantes_todos{
 display: flex;
 justify-content: space-around;
 }
+
+
+
+
+
+
+
+.estudante-perfil {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.estudante-redes {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.estudante-icone {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.2s;
+}
+
+.estudante-icone:hover {
+    transform: scale(1.1);
+}
+
+
+
 .escola{
 background-image: linear-gradient(#C9BEFF);
 color: white;
