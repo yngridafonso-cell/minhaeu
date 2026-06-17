@@ -48,8 +48,8 @@ padding-right: 30px;
 
 /* Estilização da foto pessoal */
 .foto.pessoal\.image {
-    width: 200px;               /* Largura fixa da imagem */
-    height: 200px;              /* Altura fixa igual à largura para manter um quadrado perfeito */
+    width: 100px;               /* Largura fixa da imagem */
+    height: 100px;              /* Altura fixa igual à largura para manter um quadrado perfeito */
     object-fit: cover;          /* Corta a imagem proporcionalmente sem distorcer */
     border-radius: 50%;         /* Deixa a foto totalmente redonda */
     border: 4px solid #ffffff;  /* Borda branca elegante ao redor da foto */
