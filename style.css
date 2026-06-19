@@ -77,7 +77,7 @@ body {
 /* A imagem se ajusta sem distorcer */
 .imagem_quem {
   width: 100vw;       /* Ocupa exatamente 100% da largura da tela */
-  height: 100vh;      /* Ocupa exatamente 100% da altura da tela */
+  height: 50vh;      /* Ocupa exatamente 100% da altura da tela */
   object-fit: cover;  /* Corta e ajusta a imagem proporcionalmente para cobrir tudo */
 }
 
@@ -167,7 +167,7 @@ width: 35px;
     color: #333333;
     margin-bottom: 8px;
 }
-}
+
 .estudante-imagem{
 width: 120px;
 }
