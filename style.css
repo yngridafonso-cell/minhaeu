@@ -78,7 +78,7 @@ body {
 .imagem_quem {
   width: 100vw;       /* Ocupa a largura da tela */
 height: auto;       /* Calcula a altura proporcional automaticamente, sem cortar */
-max-height: 80vh;   /* Garante que ela não passe de um limite de altura se a tela for muito alta */
+max-height: 50vh;   /* Garante que ela não passe de um limite de altura se a tela for muito alta */
 }
 
 
