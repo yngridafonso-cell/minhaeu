@@ -76,7 +76,7 @@ body {
 
 /* A imagem se ajusta sem distorcer */
 .imagem_quem {
-  wwidth: 100vw;       /* Mantém a largura total da tela */
+  width: 100vw;       /* Mantém a largura total da tela */
 height: 60vh;       /* Diminui a altura (ajuste o valor como preferir) */
 object-fit: fill;   /* Opcional: força o preenchimento, mas pode distorcer */
 /* Ou remova o object-fit e use a regra abaixo para manter a proporção: */
