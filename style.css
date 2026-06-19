@@ -58,6 +58,15 @@ padding-right: 30px;
     align-items: center;
 }
 
+.imagem_quem {
+display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 1920vw;
+}
+
+
 /* Coluna da Foto */
 .banner-col-foto {
     display: flex;
