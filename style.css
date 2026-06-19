@@ -58,13 +58,29 @@ padding-right: 30px;
     align-items: center;
 }
 
-.imagem_quem {
-display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 1920vw;
+/* Importante: Remove as margens padrão do navegador para não dar erro */
+body {
+  margin: 0;
+  padding: 0;
 }
+
+/* O container centraliza o conteúdo */
+.estudante {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Garante que nada passe dos limites da tela */
+}
+
+/* A imagem se ajusta sem distorcer */
+.imagem_quem {
+  width: 100vw;       /* Ocupa exatamente 100% da largura da tela */
+  height: 100vh;      /* Ocupa exatamente 100% da altura da tela */
+  object-fit: cover;  /* Corta e ajusta a imagem proporcionalmente para cobrir tudo */
+}
+
 
 
 /* Coluna da Foto */
