@@ -76,9 +76,10 @@ body {
 
 /* A imagem se ajusta sem distorcer */
 .imagem_quem {
-  width: 100vw;       /* Ocupa a largura da tela */
-height: auto;       /* Calcula a altura proporcional automaticamente, sem cortar */
-max-height: 50vh;   /* Garante que ela não passe de um limite de altura se a tela for muito alta */
+  wwidth: 100vw;       /* Mantém a largura total da tela */
+height: 60vh;       /* Diminui a altura (ajuste o valor como preferir) */
+object-fit: fill;   /* Opcional: força o preenchimento, mas pode distorcer */
+/* Ou remova o object-fit e use a regra abaixo para manter a proporção: */
 }
 
 
