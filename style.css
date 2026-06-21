@@ -68,7 +68,7 @@ body {
 body {
     display: grid;
     place-items: center;
-    min-height: 100vh;
+    min-height: 50vh;
     margin: 0;
     font-family: sans-serif;
 }
