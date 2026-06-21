@@ -68,7 +68,7 @@ body {
 padding: 50px;
 text-align: center;
 }
-/* O container centraliza o conteúdo */
+
 .estudante {
   display: flex;
   justify-content: center;
