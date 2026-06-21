@@ -64,9 +64,18 @@ body {
   padding: 0;
 }
 
-.estudante_titulo{
-padding: 100px;
-text-align: center;
+/* Aplica o estilo na página inteira e centraliza tudo */
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Alinha o texto da sua seção */
+.estudante {
+    text-align: center;
 }
 
 .estudante {
