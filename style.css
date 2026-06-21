@@ -58,18 +58,29 @@ padding-right: 30px;
     align-items: center;
 }
 
-/* Importante: Remove as margens padrão do navegador para não dar erro */
-body {
-  margin: 0;
-  padding: 0;
+/* Remove o espaço invisível de todas as tags */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     display: grid;
     place-items: center;
-    /* Apagamos o min-height: 100vh daqui */
-    margin: 0;
+    min-height: 100vh; /* Se quiser centralizar na tela toda, mantenha. Se quiser o conteúdo colado no topo da página, apague esta linha */
     font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+.estudante {
+    text-align: center;
+    padding: 10px; /* Controla o espaço interno em volta do texto */
+}
+
+.estudante_titulo {
+    margin: 0; /* Garante que o título não empurre nada para cima ou para baixo */
+    font-size: 24px;
 }
 
 .estudante {
