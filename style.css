@@ -64,20 +64,23 @@ body {
   padding: 0;
 }
 
-/* Aplica o estilo na página inteira e centraliza tudo */
 body {
     display: grid;
     place-items: center;
-    min-height: 50vh;
+    /* Apagamos o min-height: 100vh daqui */
     margin: 0;
     font-family: sans-serif;
 }
 
-/* Alinha o texto da sua seção */
 .estudante {
     text-align: center;
 }
 
+/* Adicione isso para controlar o espaço do título */
+.estudante_titulo {
+    margin-top: 10px;    /* Espaço menor em cima */
+    margin-bottom: 10px; /* Espaço menor embaixo */
+}
 .estudante {
   display: flex;
   justify-content: center;
