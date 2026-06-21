@@ -64,6 +64,10 @@ body {
   padding: 0;
 }
 
+.estudante_titulo{
+padding: 50px;
+text-align: center;
+}
 /* O container centraliza o conteúdo */
 .estudante {
   display: flex;
