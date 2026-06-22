@@ -50,7 +50,7 @@ padding-right: 30px;
 
 /* Container que limita a largura máxima do site */
 .banner-container {
-    max-width: 1100px;
+    max-width: 1200px;
     width: 50%;
     display: grid;
     grid-template-columns: 1fr 1fr; /* Divide em duas colunas iguais */
