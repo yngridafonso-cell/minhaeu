@@ -43,7 +43,7 @@ padding-right: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px 20px;
+    padding: 0 20px;
     background-color: #0f172a; /* Cor de fundo principal (Azul Escuro/Grafite) */
     min-height: 80vh;
 }
@@ -51,7 +51,7 @@ padding-right: 30px;
 /* Container que limita a largura máxima do site */
 .banner-container {
     max-width: 1200px;
-    width: 50%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr; /* Divide em duas colunas iguais */
     gap: 40px; /* Espaço entre a foto e o texto */
