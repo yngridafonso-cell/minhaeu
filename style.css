@@ -68,7 +68,7 @@ padding-right: 30px;
 body {
     display: grid;
     place-items: center;
-    min-height: 100vh; /* Se quiser centralizar na tela toda, mantenha. Se quiser o conteúdo colado no topo da página, apague esta linha */
+    margin-top: 20px
     font-family: sans-serif;
     background-color: #f0f0f0;
 }
