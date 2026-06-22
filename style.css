@@ -7,12 +7,12 @@ body{
 font-family: "Poppins", sans-serif;
 }
 header{
-background-color: #e2e8f0;
+background-color: #424e61;
 color: white;
 width: 100%;
 padding: 20px;
 }
-.cabecalho-itens{E49BA6
+.cabecalho-itens{
 max-width: 1980px;
 margin: 0 auto;
 display: flex;
@@ -37,142 +37,10 @@ justify-content: flex-end;
 width: 25%;
 padding-right: 30px;
 }
-
-/* Paleta de Cores Sugerida: Dark Modern / Tech */
-.banner1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
-    background-color: #0f172a; /* Cor de fundo principal (Azul Escuro/Grafite) */
-    min-height: 80vh;
+.banner1{
+display: flex;
+justify-content: center;
 }
-
-/* Container que limita a largura máxima do site */
-.banner-container {
-    max-width: 1200px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Divide em duas colunas iguais */
-    gap: 40px; /* Espaço entre a foto e o texto */
-    align-items: center;
-}
-
-/* Remove o espaço invisível de todas as tags */
-* {
-    margin: 5;
-    padding: 5;
-    box-sizing: border-box;
-}
-
-body {
-
-    place-items: center;
-    margin-top: 20px
-    font-family: sans-serif;
-    background-color: #f0f0f0;
-}
-
-.estudante {
-    text-align: center;
-    padding: 10px; /* Controla o espaço interno em volta do texto */
-}
-
-.estudante_titulo {
-    margin: 0; /* Garante que o título não empurre nada para cima ou para baixo */
-    font-size: 24px;
-}
-
-.estudante {
-    text-align: center;
-}
-
-/* Adicione isso para controlar o espaço do título */
-.estudante_titulo {
-    margin-top: 10px;    /* Espaço menor em cima */
-    margin-bottom: 10px; /* Espaço menor embaixo */
-}
-.estudante {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden; /* Garante que nada passe dos limites da tela */
-}
-
-
-/* Coluna da Foto */
-.banner-col-foto {
-    display: flex;
-    justify-content: center;
-}
-
-.foto-pessoal {
-    max-width: 100%;
-    height: auto;
-    border-radius: 16px; /* Bordas mais arredondadas e modernas */
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); /* Sombra marcante */
-}
-
-/* Coluna do Texto */
-.banner-col-texto {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Título em destaque com efeito degradê */
-.titulo-grande {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1.2;
-    font-family: sans-serif;
-    /* Efeito de cor degradê moderna no texto */
-    background: linear-gradient(to right, #a855f7, #6366f1); 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Texto de apoio */
-.texto-descricao {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: #94a3b8; /* Cinza claro suave para leitura confortável */
-    font-family: sans-serif;
-}
-
-/* RESPONSIVIDADE (Telas menores/Celular) */
-@media (max-width: 768px) {
-    .banner-container {
-        grid-template-columns: 1fr; /* Transforma em uma única coluna */
-        text-align: center; /* Centraliza os textos no celular */
-        gap: 30px;
-    }
-    
-    .titulo-grande {
-        font-size: 2rem; /* Diminui o título para não quebrar a tela do celular */
-    }
-}
-
-
-/* Estilização da foto pessoal */
-/*.foto.pessoal\.image {
-    display: flex;
-    justify-content: flex-start;
-    width: 300px;               /* Largura fixa da imagem */
-    /*height: 300px;              /* Altura fixa igual à largura para manter um quadrado perfeito */
-    /*object-fit: cover;          /* Corta a imagem proporcionalmente sem distorcer */
-    /*border: 4px solid #ffffff;  /* Borda branca elegante ao redor da foto */
-   /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade */
-   /* transition: transform 0.3s ease; /* Transição suave para o efeito de passar o mouse */
-
-
-/* Efeito visual ao passar o mouse por cima da foto */
-.foto.pessoal\.image:hover {
-    transform: scale(1.05);     /* Aumenta levemente o tamanho da foto */
-}
-
 
 .estudante_titulo{
 padding: 50px;
@@ -181,10 +49,6 @@ text-align: center;
 }
 .estudante-nome{
 text-align: center;
-width: 35px;
- font-size: 18px;
-    color: #333333;
-    margin-bottom: 8px;
 }
 
 .estudante-imagem{
@@ -202,50 +66,14 @@ padding: 24px 0;
 .estudante.div{
 text-align: center;
 padding: 24px 0;
-background-color: #ffffff; /* Cor de fundo da caixinha */
-    border-radius: 8px;
-    max-width: 350px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
 }
 .estudantes_todos{
 display: flex;
 justify-content: space-around;
 }
 
-
-
-
-
-
-
-.estudante-perfil {
-    font-size: 14px;
-    color: #666666;
-    line-height: 1.5;
-    margin-bottom: 16px;
-}
-
-.estudante-redes {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-}
-
-.estudante-icone {
-    width: 32px;
-    height: 32px;
-    transition: transform 0.2s;
-}
-
-.estudante-icone:hover {
-    transform: scale(1.1);
-}
-
-
-
 .escola{
-background-image: linear-gradient(#C9BEFF);
+background-image: linear-gradient(#40A2E3,#7FC2EF);
 color: white;
 display: flex;
 justify-content:center;
