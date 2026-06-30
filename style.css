@@ -52,23 +52,24 @@ body {
 }
 
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
-.Minhas_músicas .estudantes_todos {
+..Minhas_músicas .estudantes_todos {
     display: flex;
-    flex-wrap: wrap; /* Permite quebrar a linha se a tela for pequena */
+    flex-direction: row; /* Força explicitamente o alinhamento lado a lado */
+    flex-wrap: wrap; 
     justify-content: center;
-    gap: 30px; /* Espaço entre os blocos de música */
+    gap: 30px; 
     padding: 20px;
 }
 
 .Minhas_músicas .estudante-div {
     display: flex;
-    flex-direction: column; /* Alinha a imagem e o texto em coluna vertical */
-    align-items: center; /* Centraliza a imagem e os textos internamente */
+    flex-direction: column; /* Deixa o texto embaixo da foto dentro de cada bloco */
+    align-items: center; 
     text-align: center;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 12px;
-    width: 220px; /* Largura fixa para os blocos ficarem iguais */
+    width: 220px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
