@@ -52,7 +52,7 @@ body {
 }
 
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
-.Minhas_músicas .estudantes_todos {
+.Minhas_músicas {
     display: flex;
     flex-direction: row; 
     flex-wrap: wrap; 
@@ -61,7 +61,7 @@ body {
     padding: 20px;
 }
 
-.Minhas_músicas .estudante-div {
+.Minhas_músicas {
     display: flex;
     flex-direction: column; 
     align-items: center; 
