@@ -1,97 +1,119 @@
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-body{
-font-family: "Poppins", sans-serif;
-}
-header{
-background-color: #424e61;
-color: white;
-width: 100%;
-padding: 20px;
-}
-.cabecalho-itens{
-max-width: 1980px;
-margin: 0 auto;
-display: flex;
-align-items: center;
-justify-content: center;
-}
-.cabecalho-imagem{
-width: 10%;
-display: flex;
-justify-content: flex-start;
-align-items: center;
-}
-.titulo_site{
-padding: 50px;
-text-align: center;
-width: 50%;
-font: 30px;
-}
-.sociais{
-display: flex;
-justify-content: flex-end;
-width: 25%;
-padding-right: 30px;
-}
-.banner1{
-display: flex;
-justify-content: center;
+*/* Configurações Gerais e Cor de Fundo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f0fa; /* Cor de fundo suave (tom pastel/lilás) */
+    color: #333333;
 }
 
-.estudante_titulo{
-padding: 50px;
-text-align: center;
-
-}
-.estudante-nome{
-text-align: center;
-}
-
-.estudante-imagem{
-width: 120px;
-}
-.estudante-icone{
-width: 38px;
-padding: 4px 8px;
-}
-.estudante{
-background-image: background-color(#faae43);
-padding: 24px 0;
+/* Cabeçalho */
+.cabecalho-itens {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.estudante.div{
-text-align: center;
-padding: 24px 0;
-}
-.estudantes_todos{
-display: flex;
-justify-content: space-around;
+.sociais img {
+    width: 40px;
+    height: auto;
+    margin-left: 15px;
 }
 
-.escola{
-background-image: linear-gradient(#40A2E3,#7FC2EF);
-color: white;
-display: flex;
-justify-content:center;
-padding: 24px 0;
-text-align:center;
-display:block;
-}
-.escola-titulo{
-padding: 50px;
-text-align: center;
-}
-.logo_rodape{
-height: 80px;
-padding: 12px 0;
-
+/* 1. Banner Principal (Foto de um lado, texto do outro) */
+.banner1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px; /* Espaço entre a foto e o texto */
+    padding: 60px 50px;
+    background-color: #e8def8; /* Fundo ligeiramente diferente para destacar o banner */
 }
 
-.link{
-color: #ffffff;
-text-decoration: none;
+.foto-pessoal {
+    width: 250px;
+    height: 250px;
+    border-radius: 50px; /* Bordas arredondadas na foto */
+    object-fit: cover;
+}
+
+.banner-texto {
+    max-width: 500px;
+}
+
+/* Títulos das Seções */
+.titulo_site {
+    text-align: center;
+    margin-top: 50px;
+    color: #4a2c73;
+}
+
+/* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
+.Minhas_músicas .estudantes_todos {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar a linha se a tela for pequena */
+    justify-content: center;
+    gap: 30px; /* Espaço entre os blocos de música */
+    padding: 20px;
+}
+
+.Minhas_músicas .estudante-div {
+    display: flex;
+    flex-direction: column; /* Alinha a imagem e o texto em coluna vertical */
+    align-items: center; /* Centraliza a imagem e os textos internamente */
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 220px; /* Largura fixa para os blocos ficarem iguais */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.estudante-imagem {
+    border-radius: 8px;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* 3. Seção Minha Vida (Textos um do lado do outro) */
+.essa_sou_eu .estudantes_todos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 20px 50px;
+}
+
+.essa_sou_eu .estudante-div {
+    flex: 1;
+    min-width: 200px; /* Impede que fiquem esmagados em telas menores */
+    max-width: 280px;
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Rodapé */
+.escola {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    background-color: #4a2c73;
+    color: #ffffff;
+}
+
+.escola .link {
+    color: #d1bbf2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logo_rodape {
+    width: 120px;
+    height: auto;
+    margin-bottom: 15px;
 }
