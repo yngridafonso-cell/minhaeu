@@ -83,11 +83,16 @@ body {
     text-align: center;
     margin-bottom: 15px;
 }
+
 .container-video{
+
     width: 100%;
-    height: auto;
-    display:flex;
+    min-height: 100vh; /* Ocupa 100% da altura da tela */
+    display: flex;
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center; /* Centraliza na vertical */
 }
+
 
 .estudante-imagem {
     border-radius: 8px;
