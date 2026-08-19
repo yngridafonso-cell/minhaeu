@@ -23,6 +23,12 @@ body {
     margin-left: 15px;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* 1. Banner Principal (Foto de um lado, texto do outro) */
 .banner1 {
     display: flex;
