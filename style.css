@@ -82,24 +82,24 @@ body {
 
 /* Início do Banner*/
 
- .banner2 {
+ /* Seu código existente acima... */
+
+/* Adicione o bloco abaixo no final do arquivo: */
+.banner2 {
   margin: 0;
-  padding: 20px; /* Dá um espaço em volta para não colar nas bordas da tela */
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Container ajustado para não ocupar a tela toda */
 .banner2 .banner-foto-container {
-  width: 90%; /* Ocupa 90% da largura (diminui um pouco) */
-  max-width: 1000px; /* Impede que fique gigante em telas muito grandes */
-  height: 70vh; /* Diminui a altura de 100vh para 70vh */
-  margin: 0 auto; /* Centraliza o container na horizontal */
+  width: 90%;
+  max-width: 1000px;
+  height: 70vh;
+  margin: 0 auto;
   overflow: hidden;
-  
-  /* Borda no container */
-  border: 3px solid #333; /* Espessura, estilo (sólida) e cor da borda */
-  border-radius: 12px; /* Opcional: arredonda levemente os cantos */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Opcional: sombra suave */
+  border: 3px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .banner2 .foto-pessoal {
@@ -109,6 +109,7 @@ body {
   object-position: center;
   display: block;
 }
+
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
 /* Alinha os blocos (cards) um do lado do outro */
 .estudantes_todos {
