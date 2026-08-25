@@ -23,10 +23,33 @@ body {
     margin-left: 15px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.menu-navegacao {
+    background-color: #af4747;
+    padding: 15px;
+    text-align: center;
+}
+
+.menu-navegacao ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-navegacao li {
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.menu-navegacao a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu-navegacao a:hover {
+    color: #fffde9;
 }
 
 /* 1. Banner Principal (Foto de um lado, texto do outro) */
