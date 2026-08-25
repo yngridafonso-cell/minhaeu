@@ -156,11 +156,11 @@ body {
 
 /* Ajuste das imagens */
 .apresentacao_bts .estudante-img {
-  width: 100px;
-  height: 100px;
+  width: 150px;  /* Aumentado de 100px para 150px */
+  height: 150px; /* Aumentado de 100px para 150px */
   object-fit: cover;
   border-radius: 8px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Garante que a imagem não seja esmagada pelo texto */
 }
 
 /* Ajuste dos textos */
