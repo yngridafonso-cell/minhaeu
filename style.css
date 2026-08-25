@@ -134,6 +134,11 @@ body {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: 100vh; /* Faz a seção ocupar a altura inteira da tela */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza na vertical */
+  align-items: center; /* Centraliza na horizontal */
 }
 
 /* Cria a grade de 2 colunas */
