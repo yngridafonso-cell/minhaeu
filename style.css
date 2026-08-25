@@ -88,19 +88,20 @@ body {
   box-sizing: border-box;
 }
 
-.banner-foto-container {
-  width: 100vw;
+/* Aplica os estilos apenas ao container que está dentro de .banner2 */
+.banner2 .banner-foto-container {
+  width: 100%;
   height: 100vh;
   overflow: hidden;
 }
 
-.foto-pessoal {
+/* Aplica os estilos apenas à imagem que está dentro de .banner2 */
+.banner2 .foto-pessoal {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
-
 }
 
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
