@@ -240,6 +240,62 @@ body {
   width: 100%;
 }
 
+/* Container principal: centraliza tudo no meio da tela */
+.apresentacao_blackpink {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+/* Grade de 2 colunas */
+.apresentacao_blackpink .estudantes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+/* Estilo do cartão de cada bloco */
+.apresentacao_blackpink .estudante-div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* Ajuste da imagem (lado esquerdo) */
+.apresentacao_blackpink .estudante-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Ajuste do texto (lado direito) */
+.apresentacao_blackpink .estudante-texto {
+  flex: 1;
+}
+
+.apresentacao_blackpink .estudante-nome {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.apresentacao_blackpink .estudante-div p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
 /* Alinha os blocos (cards) um do lado do outro */
 .estudantes_todos {
