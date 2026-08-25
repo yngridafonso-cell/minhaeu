@@ -85,30 +85,30 @@ body {
  /* Seu código existente acima... */
 
 /* Adicione o bloco abaixo no final do arquivo: */
-.banner2 {
-  margin: 0;
-  padding: 20px;
-  box-sizing: border-box;
-}
+  .banner2 {
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-.banner2 .banner-foto-container {
-  width: 90%;
-  max-width: 1000px;
-  height: 70vh;
-  margin: 0 auto;
-  overflow: hidden;
-  border: 3px solid #333;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-}
+    .banner2 .banner-foto-container {
+      width: 90%;
+      max-width: 1000px;
+      height: 70vh;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 3px solid #333;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
 
-.banner2 .foto-pessoal {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
+    .banner2 .foto-pessoal {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
 
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
 /* Alinha os blocos (cards) um do lado do outro */
