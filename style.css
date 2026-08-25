@@ -90,7 +90,7 @@ body {
 
 /* Aplica os estilos apenas ao container que está dentro de .banner2 */
 .banner2 .banner-foto-container {
-  width: 100%;
+  width: 75%;
   height: 100vh;
   overflow: hidden;
 }
