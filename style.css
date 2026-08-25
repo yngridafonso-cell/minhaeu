@@ -129,6 +129,64 @@ body {
   color: #555;
 }
 
+
+.apresentacao_bts {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cria a grade de 2 colunas */
+.apresentacao_bts .estudantes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Estilo do cartão de cada bloco */
+.apresentacao_bts .estudante-div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+/* Ajuste das imagens */
+.apresentacao_bts .estudante-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Ajuste dos textos */
+.apresentacao_bts .estudante-texto {
+  flex: 1;
+}
+
+.apresentacao_bts .estudante-nome {
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
+}
+
+.apresentacao_bts .estudante-div p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Faz o 7º bloco ocupar o centro na parte de baixo */
+.apresentacao_bts .bloco-inferior {
+  grid-column: 1 / -1;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 /* 2. Seção de Músicas (Um do lado do outro, texto embaixo da foto) */
 /* Alinha os blocos (cards) um do lado do outro */
 .estudantes_todos {
