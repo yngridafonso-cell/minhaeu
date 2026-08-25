@@ -117,7 +117,7 @@ body {
   text-align: center; /* Centraliza o texto (opcional, mude para 'left' se preferir alinhado à esquerda) */
 }
 
-.conteudo-texto h2 {
+.conteudo-texto h3 {
   font-size: 1.8rem; /* Tamanho do título */
   margin-bottom: 10px;
   color: #333;
@@ -165,7 +165,7 @@ body {
   text-align: center; /* Centraliza o texto (opcional, mude para 'left' se preferir alinhado à esquerda) */
 }
 
-.conteudo-texto h2 {
+.conteudo-texto h3 {
   font-size: 1.8rem; /* Tamanho do título */
   margin-bottom: 10px;
   color: #333;
