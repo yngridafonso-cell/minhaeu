@@ -338,15 +338,12 @@
         }
     };
 
-    // ==========================================
+
     // PARTE 1: CATÁLOGO ESTRUTURADO DAS 20 FASES
-    // ==========================================
 
     const PhaseCatalog = {};
 
-    // ------------------------------------------------------------------------
     // Bloco A: Manipulação Direta e Deslocamento Linear (Fases 1 a 5 - Fácil)
-    // ------------------------------------------------------------------------
 
     PhaseCatalog[1] = function (stage) {
         document.getElementById('phase-title').innerText = "Fase 1: O Escritório Trancado (Fácil)";
@@ -596,7 +593,7 @@
             { left: '100px', top: '70px' }, { left: '210px', top: '70px' },
             { left: '320px', top: '70px' }, { left: '210px', top: '400px' }
         ];
-
+    }
         positions.forEach((pos, idx) => {
             const light = document.createElement('div');
             light.className = 'interactive';
