@@ -246,7 +246,35 @@ gameState.currentLevel = 1;
 gameState.inventory = [];
 gameState.logs = ["O jogo foi reiniciado. Você está trancado novamente."];
 // Força a restauração do esqueleto padrão do HTML ao reiniciar
-document.getElementById("escape-game-project-root").innerHTML = <div id="escape-game-container">  <div class="game-header">  <h2 class="game-title" id="game-title-el"></h2>  <button class="fullscreen-btn" id="toggle-fs">🖥️ Tela Cheia</button>  </div>  <div class="game-body">  <div class="room-view">  <div class="room-description" id="room-desc-el"></div>  <div class="interaction-zone" id="interaction-zone-el"></div>  </div>  <div class="sidebar">  <h3>Inventário</h3>  <ul class="inventory-list" id="inventory-list-el"></ul>  <div class="history-wrapper">  <h3>Histórico</h3>  <div class="game-log" id="game-log-el"></div>  </div>  </div>  </div>  </div>;
+// document.getElementById("escape-game-project-root").innerHTML = <div id="escape-game-container">  <div class="game-header">  <h2 class="game-title" id="game-title-el"></h2>  <button class="fullscreen-btn" id="toggle-fs">🖥️ Tela Cheia</button>  </div>  <div class="game-body">  <div class="room-view">  <div class="room-description" id="room-desc-el"></div>  <div class="interaction-zone" id="interaction-zone-el"></div>  </div>  <div class="sidebar">  <h3>Inventário</h3>  <ul class="inventory-list" id="inventory-list-el"></ul>  <div class="history-wrapper">  <h3>Histórico</h3>  <div class="game-log" id="game-log-el"></div>  </div>  </div>  </div>  </div>;
+document.getElementById("escape-game-project-root").innerHTML = `
+  <div id="escape-game-container">
+    <div class="game-header">
+      <h2 class="game-title" id="game-title-el"></h2>
+      <button class="fullscreen-btn" id="toggle-fs">
+        🖥️ Tela Cheia
+      </button>
+    </div>
+
+    <div class="game-body">
+      <div class="room-view">
+        <div class="room-description" id="room-desc-el"></div>
+        <div class="interaction-zone" id="interaction-zone-el"></div>
+      </div>
+
+      <div class="sidebar">
+        <h3>Inventário</h3>
+        <ul class="inventory-list" id="inventory-list-el"></ul>
+
+        <div class="history-wrapper">
+          <h3>Histórico</h3>
+          <div class="game-log" id="game-log-el"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
 setupFullscreenEvent();
 render();
 }
