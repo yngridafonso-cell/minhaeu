@@ -31,6 +31,7 @@
 </head>
 <body>
 
+  <!-- menu -->
 <nav class="menu-navegacao">
   <ul>
   <li><a href="index.html">pagina inicial</a></li>
@@ -40,21 +41,39 @@
 </ul>
 </nav>
 
-<!-- Exemplo de como deve ficar dentro da sua seção preta central -->
-<section style="background-color: #000; display: flex; justify-content: center; align-items: center; min-height: 550px;">
+
+<!-- SEÇÃO CENTRAL DO JOGO -->
+<section class="game-section-container">
+  <div id="escape-game-project-root">
     
-    <!-- INSIRA ESTA LINHA EXATAMENTE AQUI NO MEIO -->
-    <div id="escape-game-project-root" style="width: 100%; max-width: 950px;"></div>
+    <!-- Estrutura síncrona fixa para evitar tela preta -->
+    <div id="escape-game-container"> 
+      <div class="game-header"> 
+        <h2 class="game-title" id="game-title-el">Fase 1: O Quarto Escuro</h2> 
+        <button class="fullscreen-btn" id="toggle-fs">🖥️ Tela Cheia</button> 
+      </div> 
+      <div class="game-body"> 
+        <div class="room-view"> 
+          <div class="room-description" id="room-desc-el">Carregando cenário...</div> 
+          <div class="interaction-zone" id="interaction-zone-el">
+            <!-- Botões dinâmicos entrarão aqui -->
+          </div> 
+        </div> 
+        <div class="sidebar"> 
+          <h3>Inventário</h3> 
+          <ul class="inventory-list" id="inventory-list-el">
+            <li class="inventory-item-empty">Vazio</li>
+          </ul> 
+          <div class="history-wrapper"> 
+            <h3>Histórico</h3> 
+            <div class="game-log" id="game-log-el"></div> 
+          </div> 
+        </div> 
+      </div> 
+    </div>
 
+  </div>
 </section>
-
-
-
-
-
-
-
-
 
 
 
