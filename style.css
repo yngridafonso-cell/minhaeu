@@ -387,3 +387,26 @@ body {
     height: auto;
     margin-bottom: 15px;
 }
+
+
+
+/* Garante que o container do jogo ocupe o espaço central e alinhe o conteúdo no meio */
+  .game-wrapper-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    width: 100%;
+    padding: 40px 20px;      /* Margem de segurança para não colar no menu/rodapé */
+    box-sizing: border-box;
+    background-color: #121212; /* Cor de fundo opcional para contrastar com o jogo */
+  }
+
+  /* Define o tamanho ideal da janela do jogo na sua página */
+  #escape-game-project-root {
+    width: 100%;
+    max-width: 950px;        /* Largura máxima confortável para o layout */
+    min-height: 550px;       /* Altura mínima para não achatar os elementos */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra elegante ao redor do jogo */
+    border-radius: 8px;
+    overflow: hidden;
+  }
