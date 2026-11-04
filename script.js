@@ -419,17 +419,31 @@
     render();
   }
 
-  // --- 6. INICIALIZAÇÃO ---
-  window.addEventListener("DOMContentLoaded", () => {
+    // --- 6. INICIALIZAÇÃO CORRIGIDA ---
+  function iniciarJogo() {
     let root = document.getElementById("escape-game-project-root");
+    
+    // Se não encontrar a div na seção, ele procura a área preta principal para se injetar
     if (!root) {
       root = document.createElement("div");
       root.id = "escape-game-project-root";
       root.style.width = "100%";
-      root.style.maxWidth = "900px";
-      root.style.margin = "20px auto";
-      document.body.appendChild(root);
+      root.style.maxWidth = "950px";
+      root.style.margin = "0 auto";
+      
+      // Tenta injetar no corpo ou no primeiro container disponível para não quebrar
+      const mainContainer = document.querySelector("main") || document.querySelector("section") || document.body;
+      mainContainer.appendChild(root);
     }
+    
     render();
-  });
+  }
+
+  // Executa imediatamente ou assim que o DOM estiver pronto
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", iniciarJogo);
+  } else {
+    iniciarJogo();
+  }
 })();
+
