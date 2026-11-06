@@ -1,20 +1,20 @@
-// O Jogo da Velha suporta dois modos: 'dupla' ou 'computador'
+// Configurações iniciais do jogo
 let modoJogo = 'dupla';
 let tabuleiro = ['', '', '', '', '', '', '', '', ''];
-let jogadorAtual = 'X'; // O jogador humano sempre começa como 'X'
+let jogadorAtual = 'X'; // O jogador humano inicial sempre será o 'X'
 let jogoAtivo = true;
 
-// Combinações de vitória do Jogo da Velha (CORRIGIDO)
-const combinacoesVitoria = [, [3, 4, 5], [6, 7, 8], // Linhas, [1, 4, 7], [2, 5, 8], // Colunas, [2, 4, 6]             // Diagonais
+// Definição correta das posições vencedoras do tabuleiro
+const combinacoesVitoria = [, [3, 4, 5], [6, 7, 8], // Linhas Horizontais, [1, 4, 7], [2, 5, 8], // Colunas Verticais, [2, 4, 6]             // Linhas Diagonais
 ];
 
-// Mapeamento dos elementos do HTML
+// Seleção dos elementos do HTML
 const celulas = document.querySelectorAll('.celula');
 const statusTexto = document.getElementById('status');
 const botaoReiniciar = document.getElementById('reiniciar');
 const seletorModo = document.getElementById('modo-jogo');
 
-// Inicializa os ouvintes de eventos
+// Inicia os ouvintes de clique e seletores
 function iniciarJogo() {
     celulas.forEach(celula => celula.addEventListener('click', celulaClicada));
     if (botaoReiniciar) botaoReiniciar.addEventListener('click', reiniciarJogo);
@@ -22,39 +22,47 @@ function iniciarJogo() {
     atualizarStatus();
 }
 
-// Controla o clique do jogador humano
+// Controla o clique em cada quadrado do tabuleiro
 function celulaClicada(evento) {
     const celulaIndex = evento.target.getAttribute('data-index');
 
+    // Bloqueia se o espaço já estiver preenchido ou se o jogo acabou
     if (tabuleiro[celulaIndex] !== '' || !jogoAtivo) return;
+   
+    // Bloqueia o clique se for o turno da inteligência artificial
     if (modoJogo === 'computador' && jogadorAtual === 'O') return;
 
-    jogada(celulaIndex);
+    executarJogada(celulaIndex);
 
+    // Se o modo for contra o computador e o jogo continuar, a máquina joga
     if (modoJogo === 'computador' && jogoAtivo && jogadorAtual === 'O') {
-        setTimeout(jogadaComputador, 500);
+        setTimeout(jogadaComputador, 500); // 0.5 segundos para simular pensamento
     }
 }
 
-function jogada(index) {
+// Renderiza a jogada no tabuleiro físico e lógico
+function ejecutarJogada(index) {
     tabuleiro[index] = jogadorAtual;
     celulas[index].textContent = jogadorAtual;
-    celulas[index].classList.add(jogadorAtual.toLowerCase());
+    celulas[index].classList.add(jogadorAtual.toLowerCase()); // Adiciona classe 'x' ou 'o' para estilização CSS
 
     verificarResultado();
 }
 
+// Gerencia o turno da Inteligência Artificial
 function jogadaComputador() {
     if (!jogoAtivo) return;
     const melhorJogada = encontrarMelhorJogada(tabuleiro);
-    jogada(melhorJogada);
+    ejecutarJogada(melhorJogada);
 }
 
+// Alterna os turnos perfeitamente entre 'X' e 'O'
 function alternarJogador() {
     jogadorAtual = jogadorAtual === 'X' ? 'O' : 'X';
     atualizarStatus();
 }
 
+// Atualiza a barra de texto informativa
 function atualizarStatus() {
     if (!statusTexto) return;
     if (modoJogo === 'computador') {
@@ -64,6 +72,7 @@ function atualizarStatus() {
     }
 }
 
+// Analisa se a rodada terminou em vitória ou empate
 function verificarResultado() {
     let rodadaVencida = false;
 
@@ -94,6 +103,7 @@ function verificarResultado() {
         return;
     }
 
+    // Verifica se houve empate (tabuleiro cheio)
     if (!tabuleiro.includes('')) {
         if (statusTexto) statusTexto.textContent = "Empate! 🤝";
         jogoAtivo = false;
@@ -103,15 +113,18 @@ function verificarResultado() {
     alternarJogador();
 }
 
+// Coloca cor diferenciada nas 3 casinhas vitoriosas
 function destacarVitoria(indices) {
     indices.forEach(index => celulas[index].classList.add('vencedor'));
 }
 
+// Modifica as regras caso mude o seletor na tela
 function alternarModo(evento) {
     modoJogo = evento.target.value;
     reiniciarJogo();
 }
 
+// Limpa todo o tabuleiro para uma nova partida
 function reiniciarJogo() {
     tabuleiro = ['', '', '', '', '', '', '', '', ''];
     jogadorAtual = 'X';
@@ -120,11 +133,12 @@ function reiniciarJogo() {
    
     celulas.forEach(celula => {
         celula.textContent = '';
-        celula.className = 'celula';
+        celula.className = 'celula'; // Limpa classes antigas de estilo
     });
 }
 
-// --- ALGORITMO MINIMAX ---
+// --- ALGORITMO MINIMAX (Lógica do Computador) ---
+
 function encontrarMelhorJogada(tabuleiroAtual) {
     let melhorPontuacao = -Infinity;
     let jogadaEscolhida = 0;
@@ -184,4 +198,5 @@ function avaliarTabuleiro(tabuleiroAtual) {
     return null;
 }
 
+// Inicializa a escuta geral do script
 iniciarJogo();
