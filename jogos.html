@@ -42,36 +42,31 @@
 </nav>
 
 
-<!-- SEÇÃO CENTRAL DO JOGO -->
-<section class="game-section-container">
-  <div id="escape-game-project-root">
-    
-    <!-- Estrutura síncrona fixa para evitar tela preta -->
-    <div id="escape-game-container"> 
-      <div class="game-header"> 
-        <h2 class="game-title" id="game-title-el">Fase 1: O Quarto Escuro</h2> 
-        <button class="fullscreen-btn" id="toggle-fs">🖥️ Tela Cheia</button> 
-      </div> 
-      <div class="game-body"> 
-        <div class="room-view"> 
-          <div class="room-description" id="room-desc-el">Carregando cenário...</div> 
-          <div class="interaction-zone" id="interaction-zone-el">
-            <!-- Botões dinâmicos entrarão aqui -->
-          </div> 
-        </div> 
-        <div class="sidebar"> 
-          <h3>Inventário</h3> 
-          <ul class="inventory-list" id="inventory-list-el">
-            <li class="inventory-item-empty">Vazio</li>
-          </ul> 
-          <div class="history-wrapper"> 
-            <h3>Histórico</h3> 
-            <div class="game-log" id="game-log-el"></div> 
-          </div> 
-        </div> 
-      </div> 
+<div class="container-jogo">
+    <h2>Jogo da Velha</h2>
+   
+    <div class="controles">
+        <label for="modo-jogo">Modo de Jogo: </label>
+        <select id="modo-jogo">
+            <option value="dupla">Jogar em Dupla</option>
+            <option value="computador">Contra o Computador</option>
+        </select>
+        <div id="status">Vez do jogador X</div>
     </div>
 
+    <div class="tabuleiro">
+        <button class="celula" data-index="0"></button>
+        <button class="celula" data-index="1"></button>
+        <button class="celula" data-index="2"></button>
+        <button class="celula" data-index="3"></button>
+        <button class="celula" data-index="4"></button>
+        <button class="celula" data-index="5"></button>
+        <button class="celula" data-index="6"></button>
+        <button class="celula" data-index="7"></button>
+        <button class="celula" data-index="8"></button>
+    </div>
+
+    <button id="reiniciar">Reiniciar Jogo</button>
   </div>
 </section>
 
