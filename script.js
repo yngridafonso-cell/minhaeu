@@ -1,291 +1,246 @@
 /**
- * JOGO: Escape the Room (5 Fases) - LÓGICA PURA
+ * ============================================================================
+ * 1. CONFIGURAÇÕES E ESTADO INICIAL DO JOGO
+ * ============================================================================
  */
 
-(function () {
-  // --- DADOS E FASES DO JOGO ---
-  const gameState = {
-    currentLevel: 1,
-    inventory: [],
-    logs: ["Você acordou trancado. Encontre uma saída."]
-  };
+// O Jogo da Velha suporta dois modos: 'dupla' ou 'computador'
+let modoJogo = 'dupla'; 
+let tabuleiro = ['', '', '', '', '', '', '', '', '']; 
+let jogadorAtual = 'X'; // O jogador humano sempre começa como 'X'
+let jogoAtivo = true; 
 
-  const levels = {
-    1: {
-      title: "Fase 1: O Quarto Escuro",
-      description: "Você está em um quarto mal iluminado. Há uma **escrivaninha velha**, uma porta trancada com chave comum e um tapete no centro do chão.",
-      actions: () => {
-        let list = [];
-        if (!gameState.inventory.includes("Chave Enferrujada")) {
-          list.push({ text: "Olhar debaixo do tapete", action: () => lookUnderRug() });
-        }
-        list.push({ text: "Examinar a escrivaninha velha", action: () => examineDesk1() });
-        list.push({ text: "Tentar abrir a porta principal", action: () => tryOpenDoor1() });
-        return list;
-      }
-    },
-    2: {
-      title: "Fase 2: A Sala dos Relógios",
-      description: "Esta sala possui três relógios de parede parados marcando horas diferentes: 03:00, 06:00 e 09:00. Na parede, há uma inscrição: 'A soma do tempo liberta o próximo passo'. Há um teclado numérico eletrônico ao lado da porta.",
-      hasInput: true,
-      inputPlaceholder: "Digite a senha numérica...",
-      actions: () => [
-        { text: "Examinar os relógios detalhadamente", action: () => log("Os relógios parecem indicar uma ordem aritmética: 3... 6... 9... Qual seria o próximo número lógico?") }
-      ],
-      checkCode: (code) => {
-        if (code.trim() === "12" || code.trim() === "36912") {
-          nextLevel("O teclado bipa verde e a porta se abre!");
-          return true;
-        }
-        return false;
-      }
-    },
-    3: {
-      title: "Fase 3: O Laboratório de Alquimia",
-      description: "Bancadas cheias de frascos químicos. Uma porta de aço possui uma fechadura mecânica em formato de engrenagem. Há uma fresta escura na parede que você não consegue alcançar com as mãos.",
-      actions: () => {
-        let list = [];
-        if (!gameState.inventory.includes("Ímã Forte")) {
-          list.push({ text: "Procurar nas gavetas do laboratório", action: () => findMagnet() });
-        }
-        if (gameState.inventory.includes("Ímã Forte") && !gameState.inventory.includes("Engrenagem de Bronze")) {
-          list.push({ text: "Usar o Ímã na fresta escura da parede", action: () => useMagnet() });
-        }
-        list.push({ text: "Inserir engrenagem na porta de aço", action: () => tryOpenDoor3() });
-        return list;
-      }
-    },
-    4: {
-      title: "Fase 4: A Biblioteca dos Enigmas",
-      description: "Prateleiras do chão ao teto. Na mesa central, um livro aberto diz: 'Tenho cauda, mas não sou cão. Não tenho asas, mas sei voar. Se me soltam, fico parado. Se me prendem, fujo com o vento.'",
-      hasInput: true,
-      inputPlaceholder: "Escreva a resposta em uma palavra...",
-      actions: () => [
-        { text: "Procurar pistas nos livros", action: () => log("Um bilhete rasgado diz: 'É leve, feita de papel ou pano, adora dias de vento no parque.'") }
-      ],
-      checkCode: (code) => {
-        const resposta = code.toLowerCase().trim();
-        if (resposta === "pipa" || resposta === "papagaio") {
-          nextLevel("Uma passagem secreta se abre atrás da estante!");
-          return true;
-        }
-        return false;
-      }
-    },
-    5: {
-      title: "Fase Final: A Sala de Controle",
-      description: "Você vê a luz do sol por uma janela blindada! O computador central gerencia a saída de emergência. A tela exibe: 'Para escapar, digite o ano atual do sistema.'",
-      hasInput: true,
-      inputPlaceholder: "Digite o ano de 4 dígitos...",
-      actions: () => [
-        { text: "Olhar os arquivos do painel", action: () => log(`O relógio interno do sistema operacional indica o ano de ${new Date().getFullYear()}.`) }
-      ],
-      checkCode: (code) => {
-        const currentYear = new Date().getFullYear().toString();
-        if (code.trim() === currentYear) {
-          gameState.currentLevel = "WIN";
-          log("SISTEMA DESBLOQUEADO! A porta principal se abre. VOCÊ ESCAPOU!", "system");
-          render();
-          return true;
-        }
-        return false;
-      }
+// Combinações de vitória (Corrigido: Adicionados os índices que faltavam)
+const combinacoesVitoria = [, [3, 4, 5], [6, 7, 8], // Linhas, [1, 4, 7], [2, 5, 8], // Colunas, [2, 4, 6]             // Diagonais
+];
+
+/**
+ * ============================================================================
+ * 2. MAPEAMENTO DE ELEMENTOS DO DOM (HTML)
+ * ============================================================================
+ */
+
+const celulas = document.querySelectorAll('.celula');
+const statusTexto = document.getElementById('status');
+const botaoReiniciar = document.getElementById('reiniciar');
+const seletorModo = document.getElementById('modo-jogo');
+
+/**
+ * ============================================================================
+ * 3. FLUXO PRINCIPAL E GERENCIAMENTO DE EVENTOS
+ * ============================================================================
+ */
+
+// Inicializa os ouvintes de eventos (Event Listeners)
+function iniciarJogo() {
+    celulas.forEach(celula => celula.addEventListener('click', celulaClicada));
+    botaoReiniciar.addEventListener('click', reiniciarJogo);
+    seletorModo.addEventListener('change', alternarModo);
+    atualizarStatus();
+}
+
+// Controla o clique do jogador humano
+function celulaClicada(evento) {
+    const celulaIndex = evento.target.getAttribute('data-index');
+
+    // Impede o clique se a célula estiver ocupada ou o jogo tiver acabado
+    if (tabuleiro[celulaIndex] !== '' || !jogoAtivo) return;
+
+    // Se for o modo contra o computador, impede o clique se for o turno da IA
+    if (modoJogo === 'computador' && jogadorAtual === 'O') return;
+
+    jogada(celulaIndex);
+
+    // Se o modo for computador e o jogo continuar ativo, a IA joga em seguida
+    if (modoJogo === 'computador' && jogoAtivo && jogadorAtual === 'O') {
+        setTimeout(jogadaComputador, 500); // Pequeno atraso para parecer mais natural
     }
-  };
+}
 
-  // --- LÓGICAS INTERNAS DAS FASES ---
-  function log(msg, type = "") {
-    gameState.logs.unshift(msg);
-    render();
-  }
+// Executa a ação de preencher a célula e verificar o estado do jogo
+function jogada(index) {
+    tabuleiro[index] = jogadorAtual;
+    celulas[index].textContent = jogadorAtual;
+    celulas[index].classList.add(jogadorAtual.toLowerCase()); // Adiciona classe 'x' ou 'o' para CSS
+    verificarResultado();
+}
 
-  function nextLevel(successMsg) {
-    log(successMsg, "system");
-    gameState.currentLevel++;
-    render();
-  }
-
-  function lookUnderRug() {
-    if (!gameState.inventory.includes("Chave Enferrujada")) {
-      gameState.inventory.push("Chave Enferrujada");
-      log("Você encontrou uma [Chave Enferrujada] sob o tapete!", "system");
-    }
-  }
-  function examineDesk1() { log("A escrivaninha está vazia, mas há marcas de arranhões apontando para o tapete."); }
-  function tryOpenDoor1() {
-    if (gameState.inventory.includes("Chave Enferrujada")) {
-      nextLevel("Você usa a Chave Enferrujada. A porta range e se abre!");
-    } else { log("A porta está trancada. Você precisa de uma chave.", "error"); }
-  }
-  function findMagnet() {
-    gameState.inventory.push("Ímã Forte");
-    log("Você vasculhou as gavetas e achou um [Ímã Forte]!", "system");
-  }
-  function useMagnet() {
-    if (gameState.inventory.includes("Ímã Forte")) {
-      gameState.inventory.push("Engrenagem de Bronze");
-      log("Usando o ímã, você puxou uma [Engrenagem de Bronze] da fresta!", "system");
-    }
-  }
-  function tryOpenDoor3() {
-    if (gameState.inventory.includes("Engrenagem de Bronze")) {
-      nextLevel("A engrenagem se encaixa, o mecanismo gira e destranca a porta!");
-    } else { log("Falta uma engrenagem para ativar o painel mecânico.", "error"); }
-  }
-
-  // --- RENDERIZADOR ---
-  function render() {
-    const root = document.getElementById("escape-game-project-root");
-    if (!root) return;
-
-    if (gameState.currentLevel === "WIN") {
-      root.innerHTML = `
-        <div id="escape-game-container">
-          <div class="game-header">
-            <h2 class="game-title">🎉 PARABÉNS! 🎉</h2>
-            <button class="fullscreen-btn" id="toggle-fs">Tela Cheia</button>
-          </div>
-          <div class="room-view" style="text-align: center; justify-content: center; gap: 20px; min-height: 350px;">
-            <h2>Você escapou com sucesso!</h2>
-            <p style="font-size: 18px;">Sua mente afiada resolveu todos os 5 níveis do desafio.</p>
-            <button class="action-btn" id="restart-game" style="align-self: center;">Jogar Novamente</button>
-          </div>
-        </div>
-      `;
-      document.getElementById("restart-game").addEventListener("click", resetGame);
-      setupFullscreenEvent();
-      return;
-    }
-
-    const currentLevelData = levels[gameState.currentLevel];
-
-    // Atualiza Textos Básicos
-    document.getElementById("game-title-el").innerText = currentLevelData.title;
-    document.getElementById("room-desc-el").innerText = currentLevelData.description;
-
-    // Atualiza Zona de Interação (Botões e Inputs)
-    const interactionZone = document.getElementById("interaction-zone-el");
-    interactionZone.innerHTML = "";
-
-    currentLevelData.actions().forEach((act, idx) => {
-      const btn = document.createElement("button");
-      btn.className = "action-btn";
-      btn.id = `act-btn-${idx}`;
-      btn.innerText = act.text;
-      btn.addEventListener("click", act.action);
-      interactionZone.appendChild(btn);
-    });
-
-    if (currentLevelData.hasInput) {
-      const inputGroup = document.createElement("div");
-      inputGroup.className = "input-group";
-      inputGroup.innerHTML = `
-        <input type="text" class="code-input" id="game-code-input" placeholder="${currentLevelData.inputPlaceholder}"> 
-        <button class="submit-btn" id="game-code-submit">Enviar</button> 
-      `;
-      interactionZone.appendChild(inputGroup);
-
-      const inputEl = inputGroup.querySelector("#game-code-input");
-      const submitEl = inputGroup.querySelector("#game-code-submit");
-
-      const executeSubmit = () => {
-        const success = currentLevelData.checkCode(inputEl.value);
-        if (!success) log("Código ou resposta incorreta. Tente novamente.", "error");
-      };
-
-      submitEl.addEventListener("click", executeSubmit);
-      inputEl.addEventListener("keypress", (e) => { if (e.key === "Enter") executeSubmit(); });
-    }
-
-    // Atualiza Inventário
-    const inventoryList = document.getElementById("inventory-list-el");
-    inventoryList.innerHTML = "";
-    if (gameState.inventory.length === 0) {
-      inventoryList.innerHTML = `<li class="inventory-item-empty">Vazio</li>`;
-    } else {
-      gameState.inventory.forEach(item => {
-        const li = document.createElement("li");
-        li.className = "inventory-item";
-        li.innerText = `🔑 ${item}`;
-        inventoryList.appendChild(li);
-      });
-    }
-
-    // Atualiza Histórico
-    const logContainer = document.getElementById("game-log-el");
-    logContainer.innerHTML = "";
-    gameState.logs.forEach(logText => {
-      const itemLog = document.createElement("div");
-      if (logText.includes("encontrou") || logText.includes("abre") || logText.includes("SISTEMA")) itemLog.className = "system-msg";
-      if (logText.includes("trancada") || logText.includes("Falta") || logText.includes("incorreta")) itemLog.className = "error-msg";
-      itemLog.innerText = `> ${logText}`;
-      logContainer.appendChild(itemLog);
-    });
-  }
-
-  // --- TELA CHEIA ---
-  function setupFullscreenEvent() {
-    const fsBtn = document.getElementById("toggle-fs");
-    if (!fsBtn) return;
-    fsBtn.replaceWith(fsBtn.cloneNode(true)); // Limpa eventos duplicados
+// Lógica de jogada do Computador
+function jogadaComputador() {
+    if (!jogoAtivo) return;
     
-    document.getElementById("toggle-fs").addEventListener("click", () => {
-      const container = document.getElementById("escape-game-container");
-      if (!document.fullscreenElement) {
-        if (container.requestFullscreen) container.requestFullscreen();
-else if (container.mozRequestFullScreen) container.mozRequestFullScreen();
-else if (container.webkitRequestFullscreen) container.webkitRequestFullscreen();
-else if (container.msRequestFullscreen) container.msRequestFullscreen();
-} else {
-if (document.exitFullscreen) document.exitFullscreen();
+    // Encontra a melhor jogada usando o algoritmo Minimax
+    const melhorJogada = encontrarMelhorJogada(tabuleiro);
+    jogada(melhorJogada);
 }
-});
-}
-function resetGame() {
-gameState.currentLevel = 1;
-gameState.inventory = [];
-gameState.logs = ["O jogo foi reiniciado. Você está trancado novamente."];
-// Força a restauração do esqueleto padrão do HTML ao reiniciar
-// document.getElementById("escape-game-project-root").innerHTML = <div id="escape-game-container">  <div class="game-header">  <h2 class="game-title" id="game-title-el"></h2>  <button class="fullscreen-btn" id="toggle-fs">🖥️ Tela Cheia</button>  </div>  <div class="game-body">  <div class="room-view">  <div class="room-description" id="room-desc-el"></div>  <div class="interaction-zone" id="interaction-zone-el"></div>  </div>  <div class="sidebar">  <h3>Inventário</h3>  <ul class="inventory-list" id="inventory-list-el"></ul>  <div class="history-wrapper">  <h3>Histórico</h3>  <div class="game-log" id="game-log-el"></div>  </div>  </div>  </div>  </div>;
-document.getElementById("escape-game-project-root").innerHTML = `
-  <div id="escape-game-container">
-    <div class="game-header">
-      <h2 class="game-title" id="game-title-el"></h2>
-      <button class="fullscreen-btn" id="toggle-fs">
-        🖥️ Tela Cheia
-      </button>
-    </div>
 
-    <div class="game-body">
-      <div class="room-view">
-        <div class="room-description" id="room-desc-el"></div>
-        <div class="interaction-zone" id="interaction-zone-el"></div>
-      </div>
+/**
+ * ============================================================================
+ * 4. ATUALIZAÇÃO DE INTERFACE (UI) E STATUS
+ * ============================================================================
+ */
 
-      <div class="sidebar">
-        <h3>Inventário</h3>
-        <ul class="inventory-list" id="inventory-list-el"></ul>
+// Alterna o jogador ativo e atualiza o texto na tela
+function alternarJogador() {
+    jogadorAtual = jogadorAtual === 'X' ? 'O' : 'X';
+    atualizarStatus();
+}
 
-        <div class="history-wrapper">
-          <h3>Histórico</h3>
-          <div class="game-log" id="game-log-el"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-`;
+// Atualiza o painel de status do jogo baseado no modo escolhido
+function atualizarStatus() {
+    if (modoJogo === 'computador') {
+        statusTexto.textContent = jogadorAtual === 'X' ? "Sua vez (X)" : "Pensando (O)...";
+    } else {
+        statusTexto.textContent = `Vez do jogador ${jogadorAtual}`;
+    }
+}
 
-setupFullscreenEvent();
-render();
+// Destaca visualmente as três células que venceram o jogo
+function destacarVitoria(indices) {
+    indices.forEach(index => celulas[index].classList.add('vencedor'));
 }
-// --- INICIALIZADOR SEGURO ---
-function init() {
-setupFullscreenEvent();
-render();
+
+/**
+ * ============================================================================
+ * 5. REGRAS DE NEGÓCIO E VERIFICAÇÕES
+ * ============================================================================
+ */
+
+// Verifica se houve vencedor ou empate
+function verificarResultado() {
+    let rodadaVencida = false;
+    let combinacaoGanhadora = null;
+
+    for (let i = 0; i < combinacoesVitoria.length; i++) {
+        const condicao = combinacoesVitoria[i];
+        const a = tabuleiro[condicao[0]];
+        const b = tabuleiro[condicao[1]];
+        const c = tabuleiro[condicao[2]];
+
+        if (a === '' || b === '' || c === '') continue;
+
+        if (a === b && b === c) {
+            rodadaVencida = true;
+            combinacaoGanhadora = condicao;
+            break;
+        }
+    }
+
+    if (rodadaVencida) {
+        destacarVitoria(combinacaoGanhadora);
+        if (modoJogo === 'computador') {
+            statusTexto.textContent = jogadorAtual === 'X' ? "Você venceu! 🎉" : "O Computador venceu! 🤖";
+        } else {
+            statusTexto.textContent = `Jogador ${jogadorAtual} venceu! 🎉`;
+        }
+        jogoAtivo = false;
+        return;
+    }
+
+    // Se não houver espaços vazios e ninguém venceu, é um empate
+    if (!tabuleiro.includes('')) {
+        statusTexto.textContent = "Empate! 🤝";
+        jogoAtivo = false;
+        return;
+    }
+
+    alternarJogador();
 }
-if (document.readyState === "loading") {
-document.addEventListener("DOMContentLoaded", init);
-} else {
-init();
+
+// Altera a configuração do modo de jogo
+function alternarModo(evento) {
+    modoJogo = evento.target.value;
+    reiniciarJogo();
 }
-})();
+
+// Reseta todas as variáveis e a interface para o estado inicial
+function reiniciarJogo() {
+    tabuleiro = ['', '', '', '', '', '', '', '', ''];
+    jogadorAtual = 'X';
+    jogoAtivo = true;
+    atualizarStatus();
+    celulas.forEach(celula => {
+        celula.textContent = '';
+        celula.className = 'celula'; // Reseta as classes CSS (remove 'x', 'o' e 'vencedor')
+    });
+}
+
+/**
+ * ============================================================================
+ * 6. ALGORITMO MINIMAX (Computador Inteligente)
+ * ============================================================================
+ */
+
+function encontrarMelhorJogada(tabuleiroAtual) {
+    let melhorPontuacao = -Infinity;
+    let jogadaEscolhida;
+
+    for (let i = 0; i < 9; i++) {
+        if (tabuleiroAtual[i] === '') {
+            tabuleiroAtual[i] = 'O'; // Computador simula jogada
+            let pontuacao = minimax(tabuleiroAtual, 0, false);
+            tabuleiroAtual[i] = '';  // Desfaz simulação
+
+            if (pontuacao > melhorPontuacao) {
+                melhorPontuacao = pontuacao;
+                jogadaEscolhida = i;
+            }
+        }
+    }
+    return jogadaEscolhida;
+}
+
+function minimax(tabuleiroAtual, profundidade, ehMaximizando) {
+    const resultado = avaliarMinimax(tabuleiroAtual);
+    if (resultado !== null) return resultado;
+
+    if (ehMaximizando) {
+        let melhorPontuacao = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (tabuleiroAtual[i] === '') {
+                tabuleiroAtual[i] = 'O';
+                let pontuacao = minimax(tabuleiroAtual, profundidade + 1, false);
+                tabuleiroAtual[i] = '';
+                melhorPontuacao = Math.max(pontuacao, melhorPontuacao);
+            }
+        }
+        return melhorPontuacao;
+    } else {
+        let melhorPontuacao = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (tabuleiroAtual[i] === '') {
+                tabuleiroAtual[i] = 'X';
+                let pontuacao = minimax(tabuleiroAtual, profundidade + 1, true);
+                tabuleiroAtual[i] = '';
+                melhorPontuacao = Math.min(pontuacao, melhorPontuacao);
+            }
+        }
+        return melhorPontuacao;
+    }
+}
+
+// Função de avaliação interna exclusiva do Minimax (evita conflitos de escopo)
+function avaliarMinimax(tabuleiroAtual) {
+    const combinacoes = [, [3, 4, 5], [6, 7, 8],
+, [1, 4, 7], [2, 5, 8],
+, [2, 4, 6]
+    ];
+
+    for (let i = 0; i < combinacoes.length; i++) {
+        const [a, b, c] = combinacoes[i];
+        if (tabuleiroAtual[a] && tabuleiroAtual[a] === tabuleiroAtual[b] && tabuleiroAtual[a] === tabuleiroAtual[c]) {
+            return tabuleiroAtual[a] === 'O' ? 10 : -10;
+        }
+    }
+
+    if (!tabuleiroAtual.includes('')) return 0; // Empate
+    return null; // Jogo ainda em andamento na simulação
+}
+
+/**
+ * ============================================================================
+ * 7. EXECUÇÃO
+ * ============================================================================
+ */
+
+iniciarJogo();
