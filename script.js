@@ -200,32 +200,3 @@ function avaliarTabuleiro(tabuleiroAtual) {
 
 // Inicializa a escuta geral do script
 iniciarJogo();
-
-
-
-
-
-
-
-
-
-/*blackpink*/
-
-
-const lightstick = document.getElementById("lightstick");
-const statusTexto = document.getElementById("status-luz");
-
-// Só executa se o lightstick existir na página atual
-if (lightstick) {
-  lightstick.addEventListener("click", function() {
-    lightstick.classList.toggle("aceso");
-
-    if (lightstick.classList.contains("aceso")) {
-      statusTexto.textContent = "Status: BLACKPINK IN YOUR AREA! 🩷";
-      statusTexto.style.color = "#ff69b4";
-    } else {
-      statusTexto.textContent = "Status: Desligado 🖤";
-      statusTexto.style.color = "#ffffff";
-    }
-  });
-}
